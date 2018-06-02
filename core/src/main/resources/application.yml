@@ -1,0 +1,18 @@
+spring:
+    profiles:
+        active: @profiles.active@
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.qindaorong.demo.core.entity
+  check-config-location: true
+
+jmx:
+  enabled: true
+
+liquibase:
+  enabled: true
+  check-change-log-location: true
+  change-log: classpath:liquibase/master.xml
+  drop-first: false
+  contexts: development, production
