@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScheduleService>
+    <service taskId="1" enable="false" fixRate="" cron="0/10 * * * * ?"
+        executeClass="com.qindaorong.demo.core.framework.task.service.TestService" groupName="JOB_POST" type="normal">
+    </service>
+
+<!--    <service taskId="5" enable="false" cron="0 20 10 ? * FRI" groupName="WEEKLY_PRODUCT_KPI_REPORT" type="report" fileType="xlsx"
+             fileName="Product KPI Report" modelType="productKpiWeeklyReport" emailId="productKpiWeeklyReport">
+        <sql limitSwitch="false">
+            SELECT
+            DATE_FORMAT(CURDATE(), '%m/%d/%y')                                 AS 'Date of Report Run',
+            CONCAT('$', ROUND(gmv_30, 2))                                      AS 'GMV (Past 30 Days)',
+            CONCAT('$', ROUND(gmv_ytd, 2))                                     AS 'GMV (YTD)',
+            CONCAT('$', ROUND(gmv_30 / order_count_30, 2))                     AS 'Avg Revenue (Past 30 Days)',
+            CONCAT('$', ROUND(gmv_ytd / order_count_ytd, 2))                   AS 'Avg Revenue (YTD)',
+            shippers_30                                                        AS 'Active Shippers (Past 30 Days)',
+            shippers_ytd                                                       AS 'Active Shippers (YTD)',
+            drivers_30                                                         AS 'Active Drivers (Past 30 Days)',
+            drivers_ytd                                                        AS 'Active Drivers (YTD)',
+            CONCAT(ROUND(churn_count_30 * 100 / drivers_30_last_week, 1), '%') AS 'Driver Churn Rate (Past 30 Days)',
+            loads_30                                                           AS 'Loads Posted to Pool (Past 30 Days)',
+            loads_ytd AS 'Loads Posted to Pool (YTD)'
+            FROM wiz_weekly_product_kpi_report;
+        </sql>
+    </service>-->
+
+</ScheduleService>
