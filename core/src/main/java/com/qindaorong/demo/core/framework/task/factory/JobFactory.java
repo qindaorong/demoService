@@ -1,7 +1,20 @@
 package com.qindaorong.demo.core.framework.task.factory;
 
-import com.qindaorong.demo.core.framework.task.domin.JobContext;
+import com.qindaorong.demo.core.framework.task.domin.DemoTask;
+import com.qindaorong.demo.core.framework.task.enums.JobContextKeyEnum;
 import java.util.concurrent.ConcurrentHashMap;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
+import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.TriggerBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +32,17 @@ import org.springframework.core.type.AnnotationMetadata;
 @Import(JobFactory.class)
 public class JobFactory implements ImportBeanDefinitionRegistrar {
     
+    private static final Logger log = LoggerFactory.getLogger(JobFactory.class);
+    
     private static final String BEAN_NAME = "jobFactory";
     
-    //已经加载在内存中的job
-    private static ConcurrentHashMap<String, JobContext> concurrentMap = new ConcurrentHashMap<String, JobContext>();
+    @Autowired
+    private Scheduler scheduler;
+    
+    /**
+     * 已经加载在内存中的job
+     */
+    private static ConcurrentHashMap<String, DemoTask> concurrentMap = new ConcurrentHashMap<>();
     
     
     /**
@@ -30,7 +50,7 @@ public class JobFactory implements ImportBeanDefinitionRegistrar {
      * @param taskId
      * @return
      */
-    public static Boolean isExist(String taskId){
+    public Boolean isExist(String taskId){
      if(concurrentMap.containsKey(taskId)){
          return Boolean.TRUE;
      }else{
@@ -39,12 +59,13 @@ public class JobFactory implements ImportBeanDefinitionRegistrar {
     }
     
     /**
-     * 添加新任务
-     * @param context
+     * 添加新任务并启动
+     * @param task
      */
-    public static void loadNewJob(JobContext context){
-        if(!isExist(context.getTaskId())){
-            concurrentMap.put(context.getTaskId(), context);
+    public void loadNewJob(DemoTask task){
+        if(!isExist(task.getTaskId())){
+            concurrentMap.put(task.getTaskId(), task);
+            this.startJob(task.getTaskId());
         }
     }
     
@@ -57,4 +78,67 @@ public class JobFactory implements ImportBeanDefinitionRegistrar {
             registry.registerBeanDefinition(BEAN_NAME, beanDefinition);
         }
     }
+    
+    
+    /**
+     * 开始启动
+     * @param taskId
+     */
+    public void startJob(String taskId){
+        
+        DemoTask task = concurrentMap.get(taskId);
+        try {
+    
+            JobKey jobKey = new JobKey(taskId, task.getGroupName());
+            Class jobClazz = Class.forName(task.getExecuteClass());
+    
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put(JobContextKeyEnum.JOB_CONTEXT_KEY.getKey(), task);
+            
+            JobDetail jobDetail = JobBuilder.newJob(jobClazz)
+              .withIdentity(jobKey)
+              .usingJobData(jobDataMap)
+              .build();
+    
+            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(task.getCron());
+            CronTrigger trigger = TriggerBuilder.newTrigger()
+              .withSchedule(cronScheduleBuilder).forJob(jobDetail).build();
+             scheduler.scheduleJob(jobDetail, trigger);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    /**
+     * 暂停job
+     * @param taskId
+     */
+    public void pauseJob(String taskId) {
+        try {
+            DemoTask task = concurrentMap.get(taskId);
+            JobKey jobKey = new JobKey(taskId, task.getGroupName());
+            scheduler.pauseJob(jobKey);
+        } catch (SchedulerException e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+    
+    
+    /**
+     * 恢复job
+     * @param taskId
+     */
+    public void resumeJob(String taskId) {
+        try {
+            DemoTask task = concurrentMap.get(taskId);
+            JobKey jobKey = new JobKey(taskId, task.getGroupName());
+            scheduler.resumeJob(jobKey);
+        } catch (SchedulerException e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+    
 }

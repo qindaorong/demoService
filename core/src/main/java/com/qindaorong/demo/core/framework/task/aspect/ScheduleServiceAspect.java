@@ -16,8 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Michael on 11/27/2017.
- */
+ * ScheduleServiceAspect
+ *
+ * @author qindaorong
+ * @create 2018-06-06 9:01 AM
+ **/
 @Aspect
 @Component
 public class ScheduleServiceAspect {

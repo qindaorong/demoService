@@ -1,20 +1,23 @@
 package com.qindaorong.demo.core.framework.task.service;
 
 import com.qindaorong.demo.core.framework.annotation.ScheduleSwitch;
-import com.qindaorong.demo.core.framework.task.interfaces.IScheduleTask;
+import org.quartz.Job;
 import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by Michael on 11/27/2017.
- * @author Michael
- */
+ * TestService
+ *
+ * @author qindaorong
+ * @create 2018-06-05 4:56 PM
+ **/
 @ScheduleSwitch
 @Service
-public class TestService implements IScheduleTask {
+public class TestService implements Job{
     
     @Override
-    public void doTask(JobExecutionContext context) {
+    public void execute(JobExecutionContext context) throws JobExecutionException {
         System.out.println("I am TestService! I worked !!!");
     }
 }

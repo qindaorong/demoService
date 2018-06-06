@@ -27,9 +27,6 @@ public class ScheduleTaskConfiguration {
     @XmlAttribute(name="cron")
     private String cron;
     
-    @XmlAttribute(name="fixRate")
-    private String fixRate;
-    
     @XmlAttribute(name="className")
     private String className;
     
@@ -42,24 +39,9 @@ public class ScheduleTaskConfiguration {
     @XmlAttribute(name="executeClass")
     private String executeClass;
     
-    @XmlElement(name = "sql")
-    private ScheduleTaskSqlConfiguration sqlConfiguration;
-    
-    @XmlAttribute(name = "type")
-    private String type;
-    
-    @XmlAttribute(name = "fileType")
-    private String fileType;
-    
-    @XmlAttribute(name = "fileName")
-    private String fileName;
-    
-    @XmlAttribute(name = "modelType")
-    private String modelType;
-    
-    @XmlAttribute(name = "emailId")
-    private String emailId;
-    
+    @XmlAttribute(name = "jobType")
+    private String jobType;
+
     public String getTaskId() {
         return taskId;
     }
@@ -70,10 +52,6 @@ public class ScheduleTaskConfiguration {
     
     public String getCron() {
         return cron;
-    }
-    
-    public String getFixRate() {
-        return fixRate;
     }
     
     public String getClassName() {
@@ -104,10 +82,6 @@ public class ScheduleTaskConfiguration {
         this.cron = cron;
     }
     
-    public void setFixRate(String fixRate) {
-        this.fixRate = fixRate;
-    }
-    
     public void setClassName(String className) {
         this.className = className;
     }
@@ -124,51 +98,11 @@ public class ScheduleTaskConfiguration {
         this.executeClass = executeClass;
     }
     
-    public ScheduleTaskSqlConfiguration getSqlConfiguration() {
-        return sqlConfiguration;
+    public String getJobType() {
+        return jobType;
     }
     
-    public void setSqlConfiguration(ScheduleTaskSqlConfiguration sqlConfiguration) {
-        this.sqlConfiguration = sqlConfiguration;
-    }
-    
-    public String getType() {
-        return type;
-    }
-    
-    public void setType(String type) {
-        this.type = type;
-    }
-    
-    public String getFileType() {
-        return fileType;
-    }
-    
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
-    
-    public String getFileName() {
-        return fileName;
-    }
-    
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-    
-    public String getModelType() {
-        return modelType;
-    }
-    
-    public void setModelType(String modelType) {
-        this.modelType = modelType;
-    }
-    
-    public String getEmailId() {
-        return emailId;
-    }
-    
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
     }
 }
