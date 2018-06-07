@@ -1,8 +1,11 @@
 package com.qindaorong.demo.core.framework.task.enums;
 
 /**
- * Created by Michael on 3/5/2018.
- */
+ * FileTypeEnum
+ *
+ * @author qindaorong
+ * @create 2018-06-05 10:51 AM
+ **/
 public enum FileTypeEnum {
     
     CSV_FILE("csv"),

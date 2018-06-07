@@ -1,14 +1,13 @@
 package com.qindaorong.demo.core.framework.task.enums;
 
 /**
- * Created by Michael on 2/28/2018.
- */
+ * JobContextKeyEnum
+ *
+ * @author qindaorong
+ * @create 2018-06-05 10:51 AM
+ **/
 public enum JobContextKeyEnum {
-    JOB_CONTEXT_KEY("jobContext"),
-    DEFAULT_NORMAL_JOB_CLASS("com.nexttrucking.wiztruck.framework.schedule.service.task.DefaultJobService"),
-    DEFAULT_ALARM_JOB_CLASS("com.nexttrucking.wiztruck.framework.schedule.service.task.DefaultAlarmJob"),
-    DEFAULT_REPORT_JOB_CLASS("com.nexttrucking.wiztruck.framework.schedule.service.task.DefaultReportJob"),
-    CHECK_SQL_DEFAULT_LIMIT("10");
+    JOB_CONTEXT_KEY("jobContext");
     
     private String key;
     

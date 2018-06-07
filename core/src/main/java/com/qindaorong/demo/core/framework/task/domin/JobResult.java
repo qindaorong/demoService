@@ -3,9 +3,11 @@ package com.qindaorong.demo.core.framework.task.domin;
 import org.joda.time.DateTime;
 
 /**
- * Created by Michael on 11/27/2017.
- * @author Michael
- */
+ * JobResult
+ *
+ * @author qindaorong
+ * @create 2018-06-05 12:01 PM
+ **/
 public class JobResult {
     
     private String taskId;

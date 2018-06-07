@@ -11,9 +11,11 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 
 /**
- * @CreateTime Created by Elv Zuo on 2017/3/13.
- * @Function <p></p>
- */
+ * QuartzConfig
+ *
+ * @author qindaorong
+ * @create 2018-06-07 9:27 AM
+ **/
 @Configuration
 @EnableAutoConfiguration
 public class QuartzConfig {

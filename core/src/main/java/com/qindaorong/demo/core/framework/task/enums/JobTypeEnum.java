@@ -1,8 +1,11 @@
 package com.qindaorong.demo.core.framework.task.enums;
 
 /**
- * Created by Michael on 2/28/2018.
- */
+ * JobTypeEnum
+ *
+ * @author qindaorong
+ * @create 2018-06-05 10:51 AM
+ **/
 public enum JobTypeEnum {
     NORMAL("normal"),//普通任务
     REPORT("report"),//报表任务

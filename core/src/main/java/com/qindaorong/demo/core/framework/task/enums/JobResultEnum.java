@@ -1,8 +1,11 @@
 package com.qindaorong.demo.core.framework.task.enums;
 
 /**
- * Created by Michael on 11/27/2017.
- */
+ * JobResultEnum
+ *
+ * @author qindaorong
+ * @create 2018-06-05 10:51 AM
+ **/
 public enum JobResultEnum {
     SUCCESS("success"),
     FAILED("failed")

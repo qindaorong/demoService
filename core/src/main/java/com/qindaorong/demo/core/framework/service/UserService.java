@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * CityServiceImpl
+ * UserService
  *
  * @author qindaorong
  * @create 2018-06-02 10:29 AM

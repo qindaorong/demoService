@@ -3,7 +3,7 @@ package com.qindaorong.demo.core.framework.task.domin;
 import java.io.Serializable;
 
 /**
- * ScheduleTaskConfigResolver
+ * DemoTask
  *
  * @author qindaorong
  * @create 2018-06-05 10:51 AM
