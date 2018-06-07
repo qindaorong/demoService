@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <changeSet id="20180607_create_table_tb_user_and_tb_authority" author="qindaorong">
+        <createTable tableName="tb_user">
+            <column name="id" type="bigint" autoIncrement="true" remarks="id primary key">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(50)" remarks="user name"/>
+            <column name="password" type="varchar(100)" remarks="password"/>
+            <column name="email" type="varchar(100)" remarks="email"/>
+            <column name="activated" type="bit" remarks=" is activated"/>
+            <column name="activation_key" type="varchar(200)" remarks="activation key"/>
+            <column name="reset_password_key" type="varchar(200)" remarks="reset password key"/>
+            <!--BaseEntity-->
+            <column name="status" remarks="record status" type="int(11)"/>
+            <column name="created_by" remarks="record who created" type="bigint"/>
+            <column defaultValueDate="${now}" name="created_date" remarks="record created date"
+                type="timestamp"/>
+            <column name="last_modified_by" remarks="record who modified" type="bigint"/>
+            <column name="last_modified_date" remarks="record modified date" type="timestamp"/>
+
+        </createTable>
+
+        <createIndex tableName="tb_user" indexName="INDEX_STATUS">
+            <column name="status"/>
+        </createIndex>
+
+<!--    **********************************************
+        create table tb_authority
+        **********************************************-->
+        <createTable tableName="tb_authority">
+            <column name="id" type="bigint" autoIncrement="true" remarks="id primary key">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(100)" remarks="userId"/>
+            <column name="authority" type="varchar(100)" remarks="authority"/>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>
